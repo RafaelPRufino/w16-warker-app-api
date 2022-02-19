@@ -65,4 +65,18 @@ class AuthController extends Controller {
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request) {
+        auth()->user()->tokens()->delete();
+
+        return response()->json([
+                    'message' => 'Desautenticado com sucesso!'
+        ]);
+    }
+
 }

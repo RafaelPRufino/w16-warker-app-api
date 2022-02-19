@@ -22,6 +22,12 @@ use App\Http\Controllers\Api\{
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('logout', [
+            AuthController::class,
+            'logout'
+        ])->name('logout');
+    });
 });
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('cidade', CidadeController::class);
